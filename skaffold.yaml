@@ -9,7 +9,7 @@ build:
     push: false
   artifacts:
     - image: adwera/ts-tasks-cron
-      context: auth
+      context: cron
       docker:
         dockerfile: Dockerfile
       sync:
