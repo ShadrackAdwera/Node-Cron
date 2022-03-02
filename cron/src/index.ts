@@ -9,7 +9,7 @@ if(!process.env.MONGO_URI) {
     throw new Error('MONGO URI is not defined!');
 }
 
-const start = async() => {
+const start = async() => { 
     try {
         await mongoose.connect(process.env.MONGO_URI!);
         app.listen(5000);

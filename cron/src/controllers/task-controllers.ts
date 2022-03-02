@@ -1,7 +1,7 @@
 import { HttpError } from '@adwesh/common';
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
-import { Task } from '../models/Task';
+import { Task } from '../models/User';
 import { TaskStatus } from '../utils/TaskStatus';
 
 const createTask = async(req: Request, res: Response, next: NextFunction) => {
@@ -19,6 +19,7 @@ const createTask = async(req: Request, res: Response, next: NextFunction) => {
     try {
         await newTask.save();
     } catch (error) {
+        console.log(error);
         return next(new HttpError('An error occured, try again', 500));
     }
     res.status(201).json({message: 'Task created', task: newTask});

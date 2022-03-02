@@ -70,8 +70,9 @@ const login = async(req: Request, res: Response, next: NextFunction) => {
 
     //check if email exists in the DB
     try {
-        foundUser = await User.findOne({email}).populate('section').exec();
+        foundUser = await User.findOne({email}).populate('tasks').exec();
     } catch (error) {
+        console.log(error);
         return next(new HttpError('An error occured, try again', 500));
     }
     if(!foundUser) {

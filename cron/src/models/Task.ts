@@ -14,16 +14,16 @@ interface TaskModel extends Model<TaskDoc> {
     status: string;
     assignedTo: string | undefined;
 }
-
+ 
 const taskSchema = new Schema({
     title: { type: String, required: true },
-    assignedTo: { type: Schema.Types.ObjectId },
-    status: { type: String, required: true, enum: Object.keys(TaskStatus), default: TaskStatus.Pending }
+    assignedTo: { type: Schema.Types.ObjectId, ref: 'User' },
+    status: { type: String, required: true, enum: Object.values(TaskStatus), default: TaskStatus.Pending }
 }, { timestamps: true, toJSON: { getters: true } });
 
 taskSchema.set('versionKey', 'version');
 taskSchema.plugin(updateIfCurrentPlugin);
 
-const Task = model<TaskDoc, TaskModel>('task', taskSchema);
+const Task = model<TaskDoc, TaskModel>('Task', taskSchema);
 
 export { Task };
