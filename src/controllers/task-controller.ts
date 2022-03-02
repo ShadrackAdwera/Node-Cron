@@ -34,4 +34,27 @@ const getTasks = async(req: Request, res: Response, next: NextFunction) => {
     }
     res.status(200).json({totalTasks: foundTasks.length, tasks: foundTasks});
  }
+
+ const updateTaskStatus = async(req: Request, res: Response, next: NextFunction) => {
+     const { taskId } = req.params;
+     let foundTask
+
+     try {
+         foundTask = await Task.findById(taskId).exec();
+     } catch (error) {
+        return next(new HttpError('An error occured, try again', 500));
+     }
+
+     if(!foundTask) {
+        return next(new HttpError('THis task dont exists cabron', 404));
+     }
+     foundTask.status = TaskStatus.Resolved;
+     try {
+         await foundTask.save();
+     } catch (error) {
+        return next(new HttpError('An error occured, try again', 500));
+     }
+     res.status(200).json({message: 'Task resolved', task: foundTask});
+  }
+  
  
