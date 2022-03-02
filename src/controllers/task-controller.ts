@@ -56,5 +56,7 @@ const getTasks = async(req: Request, res: Response, next: NextFunction) => {
      }
      res.status(200).json({message: 'Task resolved', task: foundTask});
   }
-  
+
+  export { createTask, getTasks, updateTaskStatus };
+
  
