@@ -12,7 +12,7 @@ export const handleCronJobs = () => {
         } catch (error) {
             throw new HttpError('An error occured', 500);
         }
-        if(!foundTasks) {
+        if(foundTasks.length===0) {
             return;
         }
         try {
