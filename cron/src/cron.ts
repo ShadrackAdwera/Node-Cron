@@ -5,6 +5,7 @@ import { TaskStatus, UserRoles } from './utils/TaskStatus';
 
 export const handleCronJobs = () => {
     cron.schedule('30 1 * * * *', async()=>{
+        console.log(`We're up and running on this cron jobs thing . . . `);
         let foundTasks;
         let foundUser;
         try {
