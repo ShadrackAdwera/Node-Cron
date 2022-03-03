@@ -5,6 +5,7 @@ import { TaskStatus, UserRoles } from "../utils/TaskStatus";
 interface UserDoc extends Document {
   email: string;
   password: string;
+  role: string;
   tasks: string[];
   version: number;
 }
@@ -12,6 +13,7 @@ interface UserDoc extends Document {
 interface UserModel extends Model<UserDoc> {
   email: string;
   password: string;
+  role: string;
   tasks: string[];
 }
 
