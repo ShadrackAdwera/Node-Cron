@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { app } from './app';
+import { handleCronJobs } from './cron';
 
 if(!process.env.JWT_KEY) {
     throw new Error('JWT is not defined!');
@@ -20,3 +21,4 @@ const start = async() => {
 }
 
 start();
+handleCronJobs();
