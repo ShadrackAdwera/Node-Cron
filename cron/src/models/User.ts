@@ -1,6 +1,6 @@
 import { Schema, Document, Model, model } from "mongoose";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
-import { TaskStatus } from "../utils/TaskStatus";
+import { TaskStatus, UserRoles } from "../utils/TaskStatus";
 
 interface UserDoc extends Document {
   email: string;
@@ -32,6 +32,7 @@ const userSchema = new Schema(
   {
     email: { type: String, required: true },
     password: { type: String, required: true },
+    role: { type: String, required: true, enum: Object.values(UserRoles), default: UserRoles.User},
     tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
   },
   { timestamps: true, toJSON: { getters: true } }
