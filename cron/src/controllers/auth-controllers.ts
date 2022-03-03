@@ -15,7 +15,7 @@ const signUp = async(req: Request, res: Response, next: NextFunction) => {
     //let foundSection;
     let hashedPassword: string;
     let token: string;
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
 
     //check if email exists in the DB
     try {
@@ -38,6 +38,7 @@ const signUp = async(req: Request, res: Response, next: NextFunction) => {
     // create new user
     const newUser = new User({
         email, 
+        role,
         password: hashedPassword, 
         tasks: []
     });
@@ -97,7 +98,7 @@ const login = async(req: Request, res: Response, next: NextFunction) => {
         return next(new HttpError('An error occured, try again', 500));
     }
 
-    res.status(201).json({message: 'Login Successful', user: { id: foundUser.id, email, token, tasks: foundUser.tasks }})
+    res.status(201).json({message: 'Login Successful', user: { id: foundUser.id, email, role: foundUser.role, token, tasks: foundUser.tasks }})
 }
 
  export { signUp, login };
